@@ -1,89 +1,88 @@
-JavaScript Concepts Synopsis
-1. Variables in JavaScript
 JavaScript uses let, const, and var to declare variables. let is block-scoped, const cannot be reassigned, and var is function-scoped.
+
 let name = "Abhishek";
 const age = 22;
 var city = "Bihar";
-________________________________________
-2. Data Types
-JavaScript supports dynamic typing, meaning variables can store different data types.
+
+JavaScript is dynamically typed, meaning variables can hold different types of data such as string, number, and boolean.
+
 let str = "Hello";
 let num = 10;
 let bool = true;
-________________________________________
-3. String Operations
+
 Strings can be manipulated using built-in methods like length, uppercase, lowercase, and substring.
-let str = "Hello World";
-console.log(str.length);
-console.log(str.toUpperCase());
-console.log(str.substring(0,5));
-________________________________________
-4. Mathematical Operations
-JavaScript supports all basic arithmetic operations.
+
+let str2 = "Hello World";
+console.log(str2.length);
+console.log(str2.toUpperCase());
+console.log(str2.substring(0,5));
+
+JavaScript supports basic mathematical operations like addition, subtraction, multiplication, and division.
+
 let a = 5;
 let b = 10;
 console.log(a + b);
 console.log(a * b);
-________________________________________
-5. Comparison and Logical Operators
-These operators are used to compare values and return boolean results.
+
+Comparison and logical operators are used to compare values and return boolean results.
+
 console.log(a > b);
 console.log(a == b);
 console.log(a != b);
-________________________________________
-6. Objects
-Objects store data in key-value pairs.
+
+Objects store data in key-value pairs and allow structured data handling.
+
 let obj = {
     name: "Alice",
     age: 30
 };
 console.log(obj.name);
-________________________________________
-7. Functions
-Functions are reusable blocks of code.
+
+Functions are reusable blocks of code used to perform specific tasks.
+
 function add(a, b) {
     return a + b;
 }
 console.log(add(5, 10));
-________________________________________
-8. Arrow Functions
+
 Arrow functions provide a shorter syntax for writing functions.
+
 const sum = (x, y) => x + y;
 console.log(sum(5, 10));
-________________________________________
-9. Arrays
+
 Arrays are used to store multiple values in a single variable.
+
 let arr = [1, 2, 3, 4];
 console.log(arr[0]);
-________________________________________
-10. Array Methods
-Useful methods like push, pop, shift, and unshift help modify arrays.
+
+Array methods like push, pop, shift, and unshift help in modifying arrays.
+
 let colors = ["red", "blue"];
 colors.push("green");
 colors.pop();
-________________________________________
-11. Array Higher Order Functions
-Functions like filter, map, and forEach simplify array processing.
+
+Higher-order functions like filter, map, and forEach simplify array operations.
+
 arr.filter(x => x > 2)
    .map(x => x * 2)
    .forEach(x => console.log(x));
-________________________________________
-12. Loops
+
 Loops are used to repeat a block of code multiple times.
+
 for(let i = 0; i < 5; i++) {
     console.log(i);
 }
-________________________________________
-13. Conditional Statements
-Conditional statements execute code based on conditions.
+
+Conditional statements execute code based on given conditions.
+
 if(a > b) {
     console.log("a is greater");
 } else {
     console.log("b is greater");
 }
-________________________________________
-14. Switch Case
-Switch statements are used for multiple conditions.
+
+Switch statements are used for handling multiple conditions.
+
 let choice = "A";
 switch(choice) {
     case "A":
@@ -92,44 +91,69 @@ switch(choice) {
     default:
         console.log("Invalid");
 }
-________________________________________
-15. Template Literals
-Template literals make string formatting easier using backticks.
-let name = "Aryan";
-console.log(`Hello ${name}`);
-________________________________________
-16. Type Conversion
-JavaScript allows conversion between strings and numbers.
+
+Template literals allow easy string formatting using backticks.
+
+let user = "Aryan";
+console.log(`Hello ${user}`);
+
+JavaScript supports type conversion between strings and numbers.
+
 console.log(Number("5"));
 console.log(String(10));
-________________________________________
-17. parseInt and parseFloat
-These functions convert strings into integers and floating-point numbers.
+
+parseInt and parseFloat convert string values into numbers.
+
 console.log(parseInt("10.5"));
 console.log(parseFloat("10.5"));
-________________________________________
-18. Math Functions
-The Math object provides mathematical utilities.
+
+The Math object provides useful mathematical functions.
+
 console.log(Math.random());
 console.log(Math.floor(4.9));
-________________________________________
-19. typeof Operator
-The typeof operator checks the type of a variable.
+
+The typeof operator is used to check the type of a variable.
+
 let value = 10;
 console.log(typeof value);
-________________________________________
-20. DOM Manipulation
-JavaScript can interact with HTML elements using the DOM.
+
+JavaScript can interact with HTML elements using DOM manipulation.
+
 const input = document.getElementById("namebox");
 console.log(input.value);
-________________________________________
-21. Event Handling
-Events allow JavaScript to respond to user actions.
+
+Event handling allows JavaScript to respond to user actions.
+
 <button onclick="submit()">Submit</button>
-________________________________________
-22. Simple HTML + JavaScript Interaction
-JavaScript can collect user input and update webpages dynamically.
+
+JavaScript can collect user input and interact with web pages dynamically.
+
 function submit() {
     const name = document.getElementById("namebox");
     console.log(name.value);
 }
+
+The Fetch API is used to get data from external sources (APIs).
+
+fetch("https://dog.ceo/api/breeds/image/random")
+  .then(res => res.json())
+  .then(data => console.log(data.message));
+
+Async/Await is a modern way to handle asynchronous operations.
+
+async function getData() {
+    const res = await fetch("https://catfact.ninja/fact");
+    const data = await res.json();
+    console.log(data.fact);
+}
+getData();
+
+Advanced array processing combines multiple concepts like filter and map.
+
+const numbers = [1, "A", 5, 10];
+
+const result = numbers
+    .filter(x => typeof x === "number")
+    .map(x => x * 2);
+
+console.log(result);
