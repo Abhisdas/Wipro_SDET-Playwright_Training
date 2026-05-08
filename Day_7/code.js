@@ -106,6 +106,10 @@ console.log(rabbit.toString())
 // }
  
 // Every object --> Object
+
+
+
+
 const car = {
     brand: "Tesla",
     start: () => console.log("VroomVroom")
