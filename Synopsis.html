@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wipro SDET Playwright Training — Synopsis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #0b0f14;
+    --surface: #111720;
+    --border: #1e2d40;
+    --accent: #00c4ff;
+    --accent2: #f7c948;
+    --text: #d4e4f0;
+    --muted: #5a7a8e;
+    --tag-bg: #0d2233;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 48px 24px 80px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    border-left: 3px solid var(--accent);
+    padding-left: 20px;
+    margin-bottom: 48px;
+    animation: fadeDown 0.7s ease both;
+  }
+  .header .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+  }
+  .header h1 span { color: var(--accent); }
+  .meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .meta span { display: flex; align-items: center; gap: 6px; }
+  .meta span::before { content: '▸'; color: var(--accent); font-size: 10px; }
+
+  /* OVERVIEW BOX */
+  .overview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent2);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    animation: fadeDown 0.7s 0.1s ease both;
+  }
+  .overview p { color: #a8c0cc; font-size: 15px; }
+
+  /* SECTION */
+  .section { margin-bottom: 52px; animation: fadeDown 0.6s ease both; }
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 28px;
+  }
+
+  /* DAY CARDS */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+  .day-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .day-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .day-card:hover::before { opacity: 1; }
+  .day-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--tag-bg);
+    padding: 3px 9px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .day-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .day-card p {
+    font-size: 13px;
+    color: #7a9aaa;
+    line-height: 1.6;
+  }
+  .tags {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tag {
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    background: #0a1a26;
+    border: 1px solid #1a3044;
+    color: #5a8aaa;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  /* CONCEPTS TABLE */
+  .concept-row {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    align-items: baseline;
+  }
+  .concept-row:last-child { border-bottom: none; }
+  .concept-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent2);
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+  .concept-desc {
+    font-size: 13.5px;
+    color: #8aaabb;
+  }
+
+  /* CODE HIGHLIGHT */
+  .code-block {
+    background: #070d12;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    padding: 18px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12.5px;
+    color: #7ec8e3;
+    overflow-x: auto;
+    margin: 10px 0 24px;
+    line-height: 1.7;
+  }
+  .code-block .kw { color: #e06c75; }
+  .code-block .fn { color: #61afef; }
+  .code-block .str { color: #98c379; }
+  .code-block .cmt { color: #3e5a6a; font-style: italic; }
+
+  /* SKILLS */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .skill-pill {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 13px;
+    padding: 6px 15px;
+    border-radius: 20px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .skill-pill:hover {
+    background: var(--tag-bg);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* FILE TREE */
+  .tree {
+    font-family: 'Space Mono', monospace;
+    font-size: 12.5px;
+    color: #4a6a7a;
+    line-height: 2;
+    padding: 20px 24px;
+    background: #060c10;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  .tree .folder { color: var(--accent2); }
+  .tree .file { color: #5a9aaa; }
+  .tree .desc { color: #2a4a5a; font-style: italic; }
+
+  /* FOOTER */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 64px;
+    padding-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .concept-name { min-width: 140px; font-size: 11px; }
+    .days-grid { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="label">Repository Synopsis</div>
+    <h1>Wipro SDET<br><span>Playwright Training</span></h1>
+    <div class="meta">
+      <span>JavaScript Fundamentals</span>
+      <span>7 Training Days</span>
+      <span>Async, OOP, DOM, APIs</span>
+      <span>Author: Abhisdas</span>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="overview">
+    <p>
+      This repository is a structured 7-day JavaScript training course completed as part of Wipro's SDET (Software Development Engineer in Test) Playwright onboarding program. The curriculum covers JavaScript from absolute basics through advanced asynchronous patterns and Object-Oriented Programming, laying the foundational layer required before transitioning into Playwright test automation. All code is in vanilla JavaScript (Node.js / browser), with no test framework yet — this phase is purely JS proficiency-building.
+    </p>
+  </div>
+
+  <!-- FILE STRUCTURE -->
+  <div class="section" style="animation-delay:0.15s">
+    <div class="section-title">Repository Structure</div>
+    <div class="tree">
+      <span class="folder">Wipro_SDET-Playwright_Training/</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_1/</span> &nbsp;&nbsp;<span class="desc">Variables, strings, arrays, DOM basics</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">index.js</span> &nbsp;&nbsp;<span class="desc">string/math/logic operations</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">type-checker, array exercises</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">index.html</span> &nbsp;&nbsp;<span class="desc">first DOM interaction (input + button)</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_2/</span> &nbsp;&nbsp;<span class="desc">Template literals, arrow functions, array methods</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">filter, map, Math.random, splice, type coercion</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">app.js</span> &nbsp;&nbsp;<span class="desc">login validation logic</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">login.html</span> &nbsp;&nbsp;<span class="desc">styled login page</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">Questions</span> &nbsp;&nbsp;<span class="desc">3 practice problems (template literals, filter/Math, type coercion)</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_3/</span> &nbsp;&nbsp;<span class="desc">Higher-order functions: forEach, map, filter, reduce</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">Code.js</span> &nbsp;&nbsp;<span class="desc">10 levelled exercises (warm-up → logic challenges)</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">Questions.txt</span> &nbsp;&nbsp;<span class="desc">detailed problem statements for all 10 exercises</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_4/</span> &nbsp;&nbsp;<span class="desc">Promises, Fetch API, async chaining</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">Promise construction, fetch + .then() chaining</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">code1.js</span> &nbsp;&nbsp;<span class="desc">10-API async mashup (dog, cat, crypto, food…)</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_5/</span> &nbsp;&nbsp;<span class="desc">Async/Await, JSON, OOP, Timers</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">async_await.js</span> &nbsp;&nbsp;<span class="desc">async functions, JSON.stringify/parse</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">classes, encapsulation, inheritance, polymorphism</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">api.js</span> &nbsp;&nbsp;<span class="desc">7 async API questions (cat facts, dog breeds…)</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="folder">oops/</span> &nbsp;&nbsp;<span class="desc">OOP pillars: abstraction, constructor, encapsulation, polymorphism</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_6/</span> &nbsp;&nbsp;<span class="desc">Advanced problem-solving with callbacks & async</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">4 real-world tasks (flight cleaner, promo, movies, payroll)</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; ├── <span class="file">code1.js</span> &nbsp;&nbsp;<span class="desc">prototypal inheritance demo</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">qsn.txt</span> &nbsp;&nbsp;<span class="desc">full problem spec for all 4 questions</span><br>
+      &nbsp;&nbsp;├── <span class="folder">Day_7/</span> &nbsp;&nbsp;<span class="desc">Hoisting, prototype chain, Object.create</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">code.js</span> &nbsp;&nbsp;<span class="desc">var hoisting, prototype extension, array iteration</span><br>
+      &nbsp;&nbsp;└── <span class="file">Javascript_Syn.txt</span> &nbsp;&nbsp;<span class="desc">comprehensive written synopsis of all JS topics covered</span>
+    </div>
+  </div>
+
+  <!-- DAY-BY-DAY -->
+  <div class="section" style="animation-delay:0.2s">
+    <div class="section-title">Day-by-Day Breakdown</div>
+    <div class="days-grid">
+
+      <div class="day-card">
+        <div class="day-badge">Day 1</div>
+        <h3>JavaScript Foundations</h3>
+        <p>Variables (<code>let</code>, <code>const</code>, <code>var</code>), data types, string methods, arithmetic & logical operators, array manipulation, DOM input capture, and a first HTML form with a submit handler.</p>
+        <div class="tags">
+          <span class="tag">variables</span><span class="tag">strings</span><span class="tag">arrays</span><span class="tag">DOM</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 2</div>
+        <h3>ES6 Features & Arrays</h3>
+        <p>Template literals, arrow functions, advanced array methods (<code>filter</code>, <code>map</code>, <code>forEach</code>, <code>splice</code>), <code>Math.random()</code>, type coercion (<code>Number()</code>, <code>parseInt()</code>), and a login page with credential validation.</p>
+        <div class="tags">
+          <span class="tag">arrow fn</span><span class="tag">filter/map</span><span class="tag">Math</span><span class="tag">login UI</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 3</div>
+        <h3>Higher-Order Functions</h3>
+        <p>10 levelled exercises covering <code>forEach</code>, <code>map</code>, <code>filter</code>, and <code>reduce</code>. Topics include temperature conversion, age filtering, price summing, counting occurrences, chaining methods, and manual array flattening without <code>.flat()</code>.</p>
+        <div class="tags">
+          <span class="tag">reduce</span><span class="tag">chaining</span><span class="tag">HOF</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 4</div>
+        <h3>Async JavaScript & Promises</h3>
+        <p>Manual <code>Promise</code> construction with resolve/reject, <code>setTimeout</code> / <code>setInterval</code> timers, Fetch API with <code>.then()</code> chaining, and a multi-API mashup hitting 10 public APIs concurrently (dog, cat, crypto, jokes, food, etc.).</p>
+        <div class="tags">
+          <span class="tag">Promise</span><span class="tag">fetch</span><span class="tag">timers</span><span class="tag">API</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 5</div>
+        <h3>Async/Await & OOP Pillars</h3>
+        <p><code>async/await</code> syntax replacing <code>.then()</code> chains, <code>JSON.stringify()</code> / <code>JSON.parse()</code>, ES6 classes with constructors, private fields, encapsulation, class inheritance with <code>super()</code>, and polymorphism via method overriding.</p>
+        <div class="tags">
+          <span class="tag">async/await</span><span class="tag">classes</span><span class="tag">OOP</span><span class="tag">JSON</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 6</div>
+        <h3>Real-World Problem Solving</h3>
+        <p>Four production-style tasks: a flight data parser/cleaner, an e-commerce promo engine with callbacks, a movie streaming analytics pipeline, and an automated payroll processor with <code>setTimeout</code>-delayed async returns. All use chained map/filter/sort/reduce.</p>
+        <div class="tags">
+          <span class="tag">callbacks</span><span class="tag">parsing</span><span class="tag">sort</span><span class="tag">Promise</span>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">Day 7</div>
+        <h3>Hoisting & Prototype Chain</h3>
+        <p>Variable hoisting differences between <code>var</code> and <code>let</code>, function hoisting, prototype-based inheritance using <code>.prototype</code>, <code>Object.create()</code>, <code>hasOwnProperty()</code>, and iterating arrays with <code>for...of</code>.</p>
+        <div class="tags">
+          <span class="tag">hoisting</span><span class="tag">prototype</span><span class="tag">Object.create</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY CONCEPTS TABLE -->
+  <div class="section" style="animation-delay:0.25s">
+    <div class="section-title">Core Concepts Covered</div>
+    <div class="concept-row">
+      <div class="concept-name">Variable Declarations</div>
+      <div class="concept-desc"><code>var</code> (function-scoped, hoisted), <code>let</code> (block-scoped), <code>const</code> (block-scoped, immutable binding) — and why <code>var</code> is avoided in modern JS.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">Array Higher-Order Fns</div>
+      <div class="concept-desc"><code>filter()</code>, <code>map()</code>, <code>reduce()</code>, <code>forEach()</code>, <code>find()</code>, <code>splice()</code>, <code>push/pop/shift/unshift</code>, chaining patterns.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">Asynchronous JS</div>
+      <div class="concept-desc">Callback functions → Promises (resolve/reject) → <code>.then()/.catch()</code> chains → <code>async/await</code> with <code>try/catch</code>. Event loop awareness via <code>setTimeout</code>/<code>setInterval</code>.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">Fetch & REST APIs</div>
+      <div class="concept-desc">Browser <code>fetch()</code> for GET requests, JSON parsing with <code>res.json()</code>, chaining data transformations post-fetch, handling multiple APIs in a single async function.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">ES6 Classes & OOP</div>
+      <div class="concept-desc">Class syntax, constructors, private fields (<code>#field</code>), method definitions, encapsulation, <code>extends</code> + <code>super()</code> for inheritance, method overriding for polymorphism, and abstraction patterns.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">Prototypal Inheritance</div>
+      <div class="concept-desc">Pre-class prototype patterns: constructor functions, <code>Function.prototype</code>, <code>Object.create()</code>, prototype chain lookup, <code>hasOwnProperty()</code>.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">DOM Manipulation</div>
+      <div class="concept-desc"><code>document.getElementById()</code>, reading <code>.value</code> from inputs, inline <code>onclick</code> event handlers, <code>window.location.href</code> for navigation, and <code>alert()</code>.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">Type System & Coercion</div>
+      <div class="concept-desc"><code>typeof</code>, explicit conversion with <code>Number()</code>, <code>String()</code>, <code>parseInt()</code>, <code>parseFloat()</code>, loose vs strict equality (<code>==</code> vs <code>===</code>), <code>isNaN()</code>.</div>
+    </div>
+    <div class="concept-row">
+      <div class="concept-name">JSON Handling</div>
+      <div class="concept-desc"><code>JSON.stringify()</code> to serialize objects to strings, <code>JSON.parse()</code> to deserialize, using JSON for API response processing and structured output.</div>
+    </div>
+  </div>
+
+  <!-- NOTABLE CODE PATTERNS -->
+  <div class="section" style="animation-delay:0.3s">
+    <div class="section-title">Notable Code Patterns</div>
+
+    <p style="color: #5a7a8e; font-size: 13px; margin-bottom: 10px;">Multi-API async function — Day 4 code1.js</p>
+    <div class="code-block">
+<span class="kw">async function</span> <span class="fn">runAPIs</span>() {
+  <span class="kw">const</span> dog  = <span class="kw">await</span> fetch(<span class="str">"https://dog.ceo/api/..."</span>).then(r => r.json());
+  <span class="kw">const</span> joke = <span class="kw">await</span> fetch(<span class="str">"https://official-joke-api.appspot.com/..."</span>).then(r => r.json());
+  <span class="cmt">// ...10 APIs total</span>
+  <span class="kw">const</span> result = { dogImage, userNames, country, meal };
+  console.log(<span class="str">"🔥 FINAL RESULT:"</span>, result);
+}</div>
+
+    <p style="color: #5a7a8e; font-size: 13px; margin-bottom: 10px;">Callback + Promise pattern — Day 6 applyPromo()</p>
+    <div class="code-block">
+<span class="kw">const</span> <span class="fn">isEligible</span> = (p) => p.category === <span class="str">"Electronics"</span> && p.price > 200;
+
+<span class="kw">function</span> <span class="fn">applyPromo</span>(cart, promoCallback) {
+  <span class="kw">return new</span> Promise((resolve) => {
+    <span class="kw">const</span> updated = cart.map(item => {
+      <span class="kw">if</span> (promoCallback(item)) { item.price *= 0.9; item.isDiscounted = <span class="kw">true</span>; }
+      <span class="kw">else</span> item.isDiscounted = <span class="kw">false</span>;
+      <span class="kw">return</span> item;
+    });
+    setTimeout(() => resolve(updated), 1000); <span class="cmt">// simulated server delay</span>
+  });
+}</div>
+
+    <p style="color: #5a7a8e; font-size: 13px; margin-bottom: 10px;">OOP — Encapsulation + Inheritance — Day 5 code.js</p>
+    <div class="code-block">
+<span class="kw">class</span> BankAccount {
+  <span class="kw">#balance</span> = 0; <span class="cmt">// private field</span>
+  <span class="fn">deposit</span>(amt) { <span class="kw">if</span> (amt > 0) <span class="kw">this</span>.#balance += amt; }
+  <span class="fn">getBalance</span>()  { <span class="kw">return this</span>.#balance; }
+}
+
+<span class="kw">class</span> Admin <span class="kw">extends</span> User {
+  <span class="fn">constructor</span>(name, role) { <span class="fn">super</span>(name); <span class="kw">this</span>.role = role; }
+  <span class="fn">logIn</span>() { <span class="fn">super</span>.logIn(); console.log(`Admin: ${<span class="kw">this</span>.role}`); }
+}</div>
+  </div>
+
+  <!-- SKILLS SUMMARY -->
+  <div class="section" style="animation-delay:0.35s">
+    <div class="section-title">Skills Demonstrated</div>
+    <div class="skills-list">
+      <span class="skill-pill">Vanilla JavaScript (ES6+)</span>
+      <span class="skill-pill">Async/Await</span>
+      <span class="skill-pill">Promise API</span>
+      <span class="skill-pill">Fetch / REST APIs</span>
+      <span class="skill-pill">Object-Oriented Programming</span>
+      <span class="skill-pill">Prototype Chain</span>
+      <span class="skill-pill">Array Higher-Order Functions</span>
+      <span class="skill-pill">DOM Manipulation</span>
+      <span class="skill-pill">JSON Processing</span>
+      <span class="skill-pill">Callback Functions</span>
+      <span class="skill-pill">Template Literals</span>
+      <span class="skill-pill">Type Coercion</span>
+      <span class="skill-pill">HTML/CSS Integration</span>
+      <span class="skill-pill">Error Handling (try/catch)</span>
+      <span class="skill-pill">Timers (setTimeout/setInterval)</span>
+      <span class="skill-pill">Data Parsing & Transformation</span>
+    </div>
+  </div>
+
+  <!-- TAKEAWAY -->
+  <div class="overview" style="border-top-color: var(--accent); margin-bottom: 0;">
+    <p style="font-size: 14px; color: #7aaabb;">
+      <strong style="color: #fff;">Training Outcome:</strong> By Day 7, the trainee has a solid command of modern JavaScript — from primitives to asynchronous multi-API orchestration and class-based OOP. This JS foundation is the prerequisite layer before advancing to Playwright (browser automation), Cypress, or any Node.js-based SDET toolchain. The repository also includes a handwritten <em>Javascript_Syn.txt</em> study reference summarizing all topics, demonstrating active consolidation of learning.
+    </p>
+  </div>
+
+  <div class="footer">
+    <span>github.com/Abhisdas/Wipro_SDET-Playwright_Training</span>
+    <span>Synopsis generated · May 2026</span>
+  </div>
+
+</div>
+</body>
+</html>
