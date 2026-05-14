@@ -1,0 +1,14 @@
+{
+  "name": "day_12",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example.spec.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.7.0"
+  }
+}
