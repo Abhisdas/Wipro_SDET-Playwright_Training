@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <form id="loginForm">
+        <h1>Login</h1>
+        <input id="username" name="username" type="text" placeholder="Username"> <br/>
+        <input id="password" name="password" type="password" placeholder="Password"> <br/>
+        <button id="loginBtn" type="submit">Login</button>
+
+        <div id="msg"></div>
+    </form>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const msg = document.getElementById('msg'); 
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // stop page reload
+
+            const formData = new FormData(loginForm);
+            const username = formData.get('username');
+            const password = formData.get('password');
+
+            console.log(username, password);
+            
+
+            try {
+                const response = await fetch('/loginwithcreds', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                if(response.ok) {
+                    msg.style.color = 'green';
+                    msg.textContent = await response.text();
+                } else {
+                    msg.style.color = 'red';
+                    msg.textContent = await response.text();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                msg.textContent = 'An error occurred while logging in.';
+            }
+        });
+    </script>
+</body>
+</html>
