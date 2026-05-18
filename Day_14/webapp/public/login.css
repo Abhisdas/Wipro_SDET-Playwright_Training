@@ -1,0 +1,41 @@
+#username {
+    margin: 10px;
+    padding: 5px;
+    width: 80%;
+}
+
+#password {
+    margin: 10px;
+    padding: 5px;
+    width: 80%;
+}
+
+#loginBtn {
+    margin: 10px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+#loginForm {
+    width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#msg {
+    margin: 10px;
+    padding: 5px;
+    color: red;
+    text-align: center;
+}
