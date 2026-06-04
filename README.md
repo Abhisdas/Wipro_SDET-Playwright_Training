@@ -3,7 +3,6 @@
 A 30-day structured training program covering JavaScript, TypeScript, and Playwright test automation — completed as part of Wipro's SDET onboarding batch.
 
 ---
-
 ## 📁 Structure
 
 ```
